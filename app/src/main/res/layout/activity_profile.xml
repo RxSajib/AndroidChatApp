@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
+
+
+
+  <RelativeLayout
+      android:id="@+id/head"
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="350dp">
+
+      <ImageView
+          android:src="@drawable/girls"
+          android:id="@+id/ProfileRoundImageID"
+          android:layout_width="match_parent"
+          android:scaleType="fitXY"
+          android:layout_height="270dp">
+          
+      </ImageView>
+
+      
+      <de.hdodenhof.circleimageview.CircleImageView
+          android:layout_width="170dp"
+          android:layout_height="170dp"
+          android:id="@+id/ProfileCircleImageID"
+          android:src="@drawable/defaultimage"
+          android:layout_alignParentBottom="true"
+          android:layout_centerHorizontal="true"
+          />
+
+  </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/ProfileNameID"
+        android:layout_below="@id/head"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:textSize="30dp"
+        android:text="Mr Sajib Roy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+ <TextView
+        android:id="@+id/ProfileStatasID"
+        android:layout_below="@id/ProfileNameID"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:textSize="20dp"
+        android:text="Pro Android Developer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+
+    <Button
+        android:id="@+id/SendMessegeButtonID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="14dp"
+        android:textSize="17dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/sentmessege_desian"
+        android:layout_marginLeft="20dp"
+        android:layout_above="@id/CancelMessegeButtonID"
+        android:textColor="#fff"
+        android:text="Send Friend Request"
+        android:layout_marginBottom="10dp"
+        />
+
+    <Button
+        android:id="@+id/CancelMessegeButtonID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="14dp"
+        android:textSize="17dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/sentmessege_desian"
+        android:layout_marginLeft="20dp"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:textColor="#fff"
+        android:text="Cancel Friend Request"
+        android:layout_marginBottom="20dp"
+        />
+
+
+</RelativeLayout>

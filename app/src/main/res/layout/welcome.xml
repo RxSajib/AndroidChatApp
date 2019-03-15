@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".welcome">
+
+
+    <ImageView
+        android:id="@+id/BackroundIageID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/bgapp"
+        />
+
+    <TextView
+        android:id="@+id/WelcomeTextID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="55dp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/white"
+        android:layout_marginLeft="10dp"
+        android:text="Welcome to Quick Chat App"
+        />
+
+    <TextView
+        android:layout_below="@id/WelcomeTextID"
+        android:paddingLeft="10dp"
+        android:layout_width="280dp"
+        android:layout_centerInParent="false"
+        android:id="@+id/desID"
+        android:layout_marginTop="50dp"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#fffFFF"
+        android:layout_height="wrap_content"
+        android:text="Quick chat app provide to chat your friends and family.provide to notifaction to friends"
+        />
+
+    <Button
+        android:id="@+id/GoButtonID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="false"
+        android:textColor="@android:color/white"
+        android:text="Enter and Go"
+        android:textSize="17dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/gobutton_desian"
+        android:layout_marginTop="60dp"
+        android:layout_below="@id/desID"
+        android:padding="17dp"
+        />
+
+
+</RelativeLayout>
