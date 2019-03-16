@@ -92,25 +92,16 @@ public class RequestFragment extends Fragment {
                 viewHolder.Mview.findViewById(R.id.DelectedButtonID).setVisibility(View.VISIBLE);
 
                 userid = getRef(position).getKey();
-            //    Toast.makeText(getActivity(), userid, Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), userid, Toast.LENGTH_LONG).show();
 
-                DatabaseReference Mref = getRef(position).child("request_type").getRef();
+             //   DatabaseReference Mref = getRef(position).child("request_type").getRef();
 
                 Mdatabase.child(userid).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                       //  if(dataSnapshot.hasChild("request_type")){
-                        if(dataSnapshot.hasChild("request_type")){
-                            String value = dataSnapshot.getValue().toString();
-                            Toast.makeText(getActivity(),value,Toast.LENGTH_LONG).show();
-                        }
-                        else{
-                            Toast.makeText(getActivity(),"no",Toast.LENGTH_LONG).show();
-                        }
-
-                           // Toast.makeText(getActivity(), val, Toast.LENGTH_LONG).show();
-                     //   }
+                     Toast.makeText(getActivity(), "ok", Toast.LENGTH_LONG).show();
 
                     }
 
