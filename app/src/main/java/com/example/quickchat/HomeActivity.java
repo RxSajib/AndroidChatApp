@@ -28,6 +28,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import es.dmoral.toasty.Toasty;
+
 public class HomeActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -124,11 +126,11 @@ public class HomeActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful()){
 
-                                            Toast.makeText(HomeActivity.this, "Group Created Success", Toast.LENGTH_LONG).show();
+                                            Toasty.success(HomeActivity.this, "Group Created Success", Toast.LENGTH_LONG).show();
                                         }
                                         else {
                                             String errormessege = task.getException().getMessage();
-                                            Toast.makeText(HomeActivity.this, errormessege, Toast.LENGTH_LONG).show();
+                                            Toasty.error(HomeActivity.this, errormessege, Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 });
@@ -172,7 +174,7 @@ public class HomeActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
                     if(dataSnapshot.child("name").exists()){
-                        Toast.makeText(HomeActivity.this, "Welcome", Toast.LENGTH_LONG).show();
+                       // Toast.makeText(HomeActivity.this, "Welcome", Toast.LENGTH_LONG).show();
                     }
                     else {
                         Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);

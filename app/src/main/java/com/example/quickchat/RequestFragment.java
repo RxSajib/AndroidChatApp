@@ -22,6 +22,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,7 +41,7 @@ public class RequestFragment extends Fragment {
     private FirebaseAuth Mauth;
     private String Currentuser;
     private DatabaseReference MuserDatabase;
-     String userid;
+     String userid, val;
 
 
     public RequestFragment() {
@@ -77,46 +78,86 @@ public class RequestFragment extends Fragment {
         super.onStart();
 
 
-
-        FirebaseRecyclerAdapter<Contact_GetSet, FriendsReqAdapter> adapter = new FirebaseRecyclerAdapter<Contact_GetSet, FriendsReqAdapter>(
-                Contact_GetSet.class,
-                R.layout.friend_request_layout,
+        FirebaseRecyclerAdapter<RequestGetSet, FriendsReqAdapter> adapterFirebaseRecyclerAdapter = new FirebaseRecyclerAdapter<RequestGetSet, FriendsReqAdapter>(
+                RequestGetSet.class, R.layout.friend_request_layout,
                 FriendsReqAdapter.class,
                 Mdatabase.child(Currentuser)
-
         ) {
             @Override
-            protected void populateViewHolder(final FriendsReqAdapter viewHolder, Contact_GetSet model, int position) {
+            protected void populateViewHolder(final FriendsReqAdapter viewHolder, RequestGetSet model, int position) {
 
-                viewHolder.Mview.findViewById(R.id.AccepectButtonID).setVisibility(View.VISIBLE);
-                viewHolder.Mview.findViewById(R.id.DelectedButtonID).setVisibility(View.VISIBLE);
+               val  = getRef(position).getKey();
+                DatabaseReference Mref = getRef(position).child("request_type").getRef();
+                //  Toast.makeText(getActivity(), val, Toast.LENGTH_LONG).show();
 
-                userid = getRef(position).getKey();
-                Toast.makeText(getActivity(), userid, Toast.LENGTH_LONG).show();
 
-             //   DatabaseReference Mref = getRef(position).child("request_type").getRef();
+                Mref.addValueEventListener(new ValueEventListener() {
+                  @Override
+                  public void onDataChange(DataSnapshot dataSnapshot) {
 
-                Mdatabase.child(userid).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                      viewHolder.Mview.findViewById(R.id.AccepectButtonID).setVisibility(View.VISIBLE);
+                      viewHolder.Mview.findViewById(R.id.DelectedButtonID).setVisibility(View.VISIBLE);
 
-                      //  if(dataSnapshot.hasChild("request_type")){
-                     Toast.makeText(getActivity(), "ok", Toast.LENGTH_LONG).show();
+                      if(dataSnapshot.exists()){
+                          final String value = dataSnapshot.getValue().toString();
+                       //   Toast.makeText(getActivity(), value, Toast.LENGTH_LONG).show();
 
-                    }
+                          if(value.equals("recived")){
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                              MuserDatabase.child(val).addValueEventListener(new ValueEventListener() {
+                                  @Override
+                                  public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    }
-                });
+                                     if (dataSnapshot.hasChild("image")){
+                                         String namefil = dataSnapshot.child("name").getValue().toString();
+                                         viewHolder.setnameref(namefil);
 
+                                         String statssfil = dataSnapshot.child("statas").getValue().toString();
+                                         viewHolder.setstatsafled(statssfil);
+                                         String imagefil = dataSnapshot.child("image").getValue().toString();
+                                         viewHolder.setimagestat(imagefil);
+                                     }
+                                     else {
+                                         String namefil = dataSnapshot.child("name").getValue().toString();
+                                         viewHolder.setnameref(namefil);
+
+                                         String statssfil = dataSnapshot.child("statas").getValue().toString();
+                                         viewHolder.setstatsafled(statssfil);
+                                     }
+
+
+                                  }
+
+                                  @Override
+                                  public void onCancelled(DatabaseError databaseError) {
+
+                                  }
+                              });
+                          }
+                      }
+                      else {
+
+                      }
+
+                  }
+
+                  @Override
+                  public void onCancelled(DatabaseError databaseError) {
+
+                  }
+              });
 
             }
         };
 
-        MrecylearView.setAdapter(adapter);
+        MrecylearView.setAdapter(adapterFirebaseRecyclerAdapter);
+        adapterFirebaseRecyclerAdapter.notifyDataSetChanged();
+        MrecylearView.setSaveEnabled(true);
+
+
     }
+
+
 
     public static class FriendsReqAdapter extends RecyclerView.ViewHolder{
 

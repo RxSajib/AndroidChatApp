@@ -49,14 +49,16 @@ public class ContactFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ContactView = inflater.inflate(R.layout.fragment_contact, container, false);
+        Mauth = FirebaseAuth.getInstance();
+        CurrentUserID = Mauth.getCurrentUser().getUid();
+
+        ContactsRef = FirebaseDatabase.getInstance().getReference().child("Contacts").child(CurrentUserID);
 
         MRecylearview = ContactView.findViewById(R.id.ContactReViewID);
         Usersdatabase = FirebaseDatabase.getInstance().getReference().child("Users");
-        Mauth = FirebaseAuth.getInstance();
-        CurrentUserID = Mauth.getCurrentUser().getUid();
+
         MRecylearview.setHasFixedSize(true);
         MRecylearview.setLayoutManager(new LinearLayoutManager(getContext()));
-        ContactsRef = FirebaseDatabase.getInstance().getReference().child("Contacts").child(CurrentUserID);
 
 
         return ContactView;

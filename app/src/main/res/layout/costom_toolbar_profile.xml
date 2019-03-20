@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="90dp"
+    >
 
-</android.support.constraint.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="70dp"
+            android:id="@+id/CostomImageID"
+            android:layout_height="70dp"
+            android:padding="10dp"
+            android:src="@drawable/defaultimage"
+            android:layout_alignParentEnd="true"
+            />
+
+        <TextView
+            android:id="@+id/ComsTomNameID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="25dp"
+            android:text="Sajib Roy"
+            android:textColor="@android:color/white"
+            />
+
+        <TextView
+            android:id="@+id/CostomStatasID"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/ComsTomNameID"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="Last Seen"
+            android:textColor="@android:color/white"
+            />
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

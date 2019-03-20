@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,6 +30,7 @@ public class FindFriendsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private DatabaseReference Mdatabase;
     private FirebaseAuth Mauth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,7 @@ public class FindFriendsActivity extends AppCompatActivity {
                 viewHolder.setimage(model.getImage());
 
 
-               final String positionID = getRef(position).getKey();
+             final String   positionID = getRef(position).getKey();
                 viewHolder.Mview.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -88,7 +90,6 @@ public class FindFriendsActivity extends AppCompatActivity {
                         Intent intent = new Intent(FindFriendsActivity.this, ProfileActivity.class);
                         intent.putExtra("intentextra", positionID);
                         startActivity(intent);
-
                     }
                 });
             }

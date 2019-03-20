@@ -161,34 +161,32 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if(dataSnapshot.child("name").exists() && dataSnapshot.child("statas").exists()){
 
-                    String profilename = dataSnapshot.child("name").getValue().toString();
-                    name.setText(profilename);
-                    String profieledetails = dataSnapshot.child("statas").getValue().toString();
-                    statas.setText(profieledetails);
-
-//                    String url = dataSnapshot.child("image").getValue().toString();
-
-
-                }
-
-
-                else if (dataSnapshot.child("image").exists()){
 
 //
+               if(dataSnapshot.exists()){
+                   if(dataSnapshot.hasChild("image")){
 
+                       String img = dataSnapshot.child("image").getValue().toString();
+                       String namefil = dataSnapshot.child("name").getValue().toString();
+                       String statsfil = dataSnapshot.child("statas").getValue().toString();
 
+                       name.setText(namefil);
+                       statas.setText(statsfil);
+                       Glide.with(SettingsActivity.this).load(img).into(profileimage);
 
+                   }
+                    if(dataSnapshot.hasChild("name") || dataSnapshot.hasChild("statas")){
 
-               //     Glide.with(SettingsActivity.this).load(image).into(profileimage);
-                }
-                else {
-
-
-
-
-                }
+                       String namefil = dataSnapshot.child("name").getValue().toString();
+                       String statsfil = dataSnapshot.child("statas").getValue().toString();
+                       name.setText(namefil);
+                       statas.setText(statsfil);
+                   }
+               }
+               else {
+                   Toast.makeText(SettingsActivity.this, "Please Logout or restart app", Toast.LENGTH_LONG).show();
+               }
             }
 
             @Override

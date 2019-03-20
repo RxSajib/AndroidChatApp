@@ -20,6 +20,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import es.dmoral.toasty.Toasty;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText email, password;
@@ -67,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                 passwordtext = password.getText().toString();
 
                 if(emailtext.isEmpty() || passwordtext.isEmpty()){
-                    Toast.makeText(LoginActivity.this, "your fildes is empty", Toast.LENGTH_LONG).show();
+                    Toasty.info(LoginActivity.this, "Your Email and Password is Empty", Toast.LENGTH_LONG).show();
                 }
                 else {
                    Mrogress.setTitle("Login your account");
@@ -80,14 +82,14 @@ public class LoginActivity extends AppCompatActivity {
 
                             if(task.isSuccessful()){
                                 Mrogress.dismiss();
-                                Toast.makeText(LoginActivity.this, "Login success", Toast.LENGTH_LONG).show();
+                                Toasty.success(LoginActivity.this, "Login success", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                 startActivity(intent);
                             }
                             else {
                                 Mrogress.dismiss();
                                 String errormessge = task.getException().getMessage();
-                                Toast.makeText(LoginActivity.this, errormessge, Toast.LENGTH_LONG).show();
+                                Toasty.error(LoginActivity.this, errormessge, Toast.LENGTH_LONG).show();
                             }
                         }
                     });

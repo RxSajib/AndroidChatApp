@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import es.dmoral.toasty.Toasty;
+
 public class RegisisterActivity extends AppCompatActivity {
 
     private EditText email, password, copassword;
@@ -69,11 +71,11 @@ public class RegisisterActivity extends AppCompatActivity {
                 copasswordtext = copassword.getText().toString();
 
                 if(emailtext.isEmpty() || passwordtext.isEmpty() || copasswordtext.isEmpty()){
-                    Toast.makeText(RegisisterActivity.this, "All fildes is empty", Toast.LENGTH_LONG).show();
+                    Toasty.info(RegisisterActivity.this, "Enter new email and password", Toast.LENGTH_LONG).show();
                 }
                 else {
                     if(!passwordtext.equals(copasswordtext)){
-                        Toast.makeText(RegisisterActivity.this, "your password didn't match", Toast.LENGTH_LONG).show();
+                        Toasty.error(RegisisterActivity.this, "your password didn't match", Toast.LENGTH_LONG).show();
                     }
                     else {
 
@@ -93,7 +95,7 @@ public class RegisisterActivity extends AppCompatActivity {
                                     Mref.child("Users").child(currentusers).setValue("");
 
                                     Mprogress.dismiss();
-                                    Toast.makeText(RegisisterActivity.this, "Account Created Success", Toast.LENGTH_LONG).show();
+                                    Toasty.success(RegisisterActivity.this, "Account Created Success", Toast.LENGTH_LONG).show();
 
                                     Intent intent = new Intent(RegisisterActivity.this, HomeActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -103,7 +105,7 @@ public class RegisisterActivity extends AppCompatActivity {
                                 else {
                                     Mprogress.dismiss();
                                     String errormessege = task.getException().getMessage();
-                                    Toast.makeText(RegisisterActivity.this, errormessege, Toast.LENGTH_LONG).show();
+                                    Toasty.error(RegisisterActivity.this, errormessege, Toast.LENGTH_LONG).show();
                                 }
                             }
                         });

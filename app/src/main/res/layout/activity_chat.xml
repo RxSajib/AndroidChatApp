@@ -1,9 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChatActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+
+
+
+    <LinearLayout
+        android:weightSum="12"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/ChatToolbarID"
+            layout="@layout/toolbar_layout"/>
+
+
+        <LinearLayout
+            android:layout_weight="11"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/ChatRecylearID"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+            </android.support.v7.widget.RecyclerView>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+
+            android:weightSum="4"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+
+           <LinearLayout
+               android:layout_weight="3"
+               android:gravity="center"
+               android:layout_width="0dp"
+               android:layout_marginLeft="5dp"
+               android:layout_marginRight="5dp"
+               android:layout_height="match_parent">
+
+
+               <EditText
+                   android:id="@+id/ChatEdittextID"
+                   android:layout_width="match_parent"
+                   android:padding="10dp"
+                   android:textSize="20dp"
+                   android:inputType="text"
+                   android:hint="Enter Your Text ..."
+                   android:background="@drawable/chat_edittext_desian"
+                   android:layout_height="wrap_content"
+                   />
+
+           </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+
+                <ImageButton
+                    android:id="@+id/ChatSentButtonID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/send_buttonicon"
+                    android:layout_margin="5dp"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
+

@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/name"
         android:layout_marginTop="10dp"
-        android:text="quick125@Email.com"
+        android:text="sajibroy206@gmail.com"
         android:layout_marginLeft="10dp"
         />
 

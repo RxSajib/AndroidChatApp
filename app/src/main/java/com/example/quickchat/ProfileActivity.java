@@ -42,10 +42,12 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-         FriendsuserID = getIntent().getStringExtra("intentextra");
+
+        FriendsuserID = getIntent().getStringExtra("intentextra");
          Mauth = FirebaseAuth.getInstance();
          CancelRequest = findViewById(R.id.CancelMessegeButtonID);
 
+         Toast.makeText(ProfileActivity.this, FriendsuserID, Toast.LENGTH_LONG).show();
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
@@ -53,9 +55,11 @@ public class ProfileActivity extends AppCompatActivity {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
 
+        Toast.makeText(ProfileActivity.this, FriendsuserID, Toast.LENGTH_LONG).show();
+
         currentstate = "new";
 
-        Mdatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(FriendsuserID);
+        Mdatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         ContactDatabase = FirebaseDatabase.getInstance().getReference().child("Contacts");
         sendFriendRequest  = FirebaseDatabase.getInstance().getReference().child("Friends request");
 
@@ -68,31 +72,39 @@ public class ProfileActivity extends AppCompatActivity {
         messegeButtoon = findViewById(R.id.SendMessegeButtonID);
 
 
-        Mdatabase.addValueEventListener(new ValueEventListener() {
+        Mdatabase.child(FriendsuserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                if((dataSnapshot.exists()) && (dataSnapshot.hasChild("image"))){
+                if(dataSnapshot.exists()){
 
-                    String namefile = dataSnapshot.child("name").getValue().toString();
-                    String statasfile = dataSnapshot.child("statas").getValue().toString();
-                    String imagepath = dataSnapshot.child("image").getValue().toString();
+                    if(dataSnapshot.hasChild("image")){
+
+                        String namefile = dataSnapshot.child("name").getValue().toString();
+                        String statasfile = dataSnapshot.child("statas").getValue().toString();
+                        String imagepath = dataSnapshot.child("image").getValue().toString();
+                        Glide.with(ProfileActivity.this).load(imagepath).into(imageView);
+                               Glide.with(ProfileActivity.this).load(imagepath).into(cimage);
+                        name.setText(namefile);
+                        statas.setText(statasfile);
+
+                        ManageRequest();
+                    }
+                    else if(dataSnapshot.hasChild("name") || dataSnapshot.hasChild("statas")){
+                        String namefile = dataSnapshot.child("name").getValue().toString();
+                        String statasfile = dataSnapshot.child("statas").getValue().toString();
+                        name.setText(namefile);
+                        statas.setText(statasfile);
 
 
-                    Glide.with(ProfileActivity.this).load(imagepath).into(imageView);
-                    Glide.with(ProfileActivity.this).load(imagepath).into(cimage);
-
-                    ManageRequest();
+                        ManageRequest();
+                    }
                 }
                 else {
-                    String namefile = dataSnapshot.child("name").getValue().toString();
-                    String statasfile = dataSnapshot.child("statas").getValue().toString();
-                    name.setText(namefile);
-                    statas.setText(statasfile);
-
-                    ManageRequest();
+                    Toast.makeText(ProfileActivity.this, "Your Info is not exists", Toast.LENGTH_LONG).show();
                 }
+
 
 
 
@@ -156,6 +168,7 @@ public class ProfileActivity extends AppCompatActivity {
                                                 messegeButtoon.setEnabled(true);
                                                 currentstate  ="new";
                                                 messegeButtoon.setText("Send Friend Request");
+                                                messegeButtoon.setBackgroundResource(R.drawable.sentmessege_desian);
 
                                                 CancelRequest.setVisibility(View.INVISIBLE);
                                                 CancelRequest.setEnabled(false);
@@ -188,7 +201,6 @@ public class ProfileActivity extends AppCompatActivity {
                                 messegeButtoon.setEnabled(true);
                                 currentstate = "sent_request";
                                 messegeButtoon.setText("Cancel friend request");
-
                             }
                         }
                     });
@@ -213,6 +225,8 @@ public class ProfileActivity extends AppCompatActivity {
                             if(reqtype.equals("sent")){
                                 currentstate = "sent_request";
                                 messegeButtoon.setText("Cancel friend request");
+                                messegeButtoon.setBackgroundResource(R.drawable.cancel_messege_desian);
+
 
                             }
                             else if(reqtype.equals("recived")){
@@ -220,6 +234,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 messegeButtoon.setText("Accepect Friend Request");
                                 CancelRequest.setVisibility(View.VISIBLE);
                                 CancelRequest.setEnabled(true);
+                                messegeButtoon.setBackgroundResource(R.drawable.sentmessege_desian);
 
 
                                 CancelRequest.setOnClickListener(new View.OnClickListener() {
@@ -238,6 +253,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     if(dataSnapshot.hasChild(FriendsuserID)){
                                         currentstate = "friends";
                                         messegeButtoon.setText("Removed This Contacts");
+                                        messegeButtoon.setBackgroundResource(R.drawable.cancel_messege_desian);
                                     }
                                 }
 
@@ -294,6 +310,7 @@ public class ProfileActivity extends AppCompatActivity {
                                                             messegeButtoon.setText("Remove This Contacts");
                                                             CancelRequest.setVisibility(View.INVISIBLE);
                                                             CancelRequest.setEnabled(false);
+                                                            messegeButtoon.setBackgroundResource(R.drawable.cancel_messege_desian);
                                                         }
                                                     });
                                                 }

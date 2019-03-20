@@ -43,7 +43,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp"
         android:textSize="30dp"
-        android:text="Mr Sajib Roy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
@@ -54,7 +53,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp"
         android:textSize="20dp"
-        android:text="Pro Android Developer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
